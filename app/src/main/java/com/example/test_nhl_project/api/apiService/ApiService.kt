@@ -1,5 +1,10 @@
 package com.example.test_nhl_project.api.apiService
 
-interface ApiService {
+import com.example.test_nhl_project.data.models.teamModels.TeamModel
+import retrofit2.Response
+import retrofit2.http.GET
 
+interface ApiService {
+    @GET("teams")
+    suspend fun getAllTeams(): Response<TeamModel>
 }
