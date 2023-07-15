@@ -36,7 +36,8 @@ android {
         viewBinding true
     }
 }
-
+apply plugin: 'com.android.application'
+apply plugin: 'dagger.hilt.android.plugin'
 dependencies {
 
 
