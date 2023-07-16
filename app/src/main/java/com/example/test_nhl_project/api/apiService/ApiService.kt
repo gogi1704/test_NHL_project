@@ -1,6 +1,6 @@
 package com.example.test_nhl_project.api.apiService
 
-import com.example.test_nhl_project.data.models.teamModels.TeamModel
+import com.example.test_nhl_project.data.models.modelsFromServer.TeamModel
 import retrofit2.Response
 import retrofit2.http.GET
 

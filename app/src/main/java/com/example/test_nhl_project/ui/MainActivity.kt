@@ -26,9 +26,7 @@ class MainActivity : AppCompatActivity() {
                     navController
                     true
                 }
-                R.id.results -> {
-                    true
-                }
+
                 R.id.info -> {
                     true
                 }

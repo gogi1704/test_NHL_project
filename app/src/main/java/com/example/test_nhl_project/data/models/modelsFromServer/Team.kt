@@ -1,4 +1,4 @@
-package com.example.test_nhl_project.data.models.teamModels
+package com.example.test_nhl_project.data.models.modelsFromServer
 
 data class Team(
     val id:Int,

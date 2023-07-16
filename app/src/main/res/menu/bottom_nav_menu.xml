@@ -7,11 +7,6 @@
         android:icon="@drawable/baseline_sports_hockey_24"
         android:title="www" />
 
-    <item
-        android:id="@+id/results"
-        android:enabled="true"
-        android:icon="@drawable/baseline_stadium_24"
-        android:title="sss" />
 
     <item
         android:id="@+id/info"
