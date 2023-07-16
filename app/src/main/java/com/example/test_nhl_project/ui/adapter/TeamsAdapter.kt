@@ -8,14 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.test_nhl_project.data.models.myModels.MyTeamModel
 import com.example.test_nhl_project.databinding.TeamItemLayoutBinding
 
-class TeamsAdapter() : ListAdapter<MyTeamModel, TeamsAdapter.TeamsViewHolder>(MyAdapterCallback()) {
+interface AdapterClickListener {
+    fun clickMore(id:Int)
+}
+
+class TeamsAdapter(private val listener: AdapterClickListener) : ListAdapter<MyTeamModel, TeamsAdapter.TeamsViewHolder>(MyAdapterCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamsViewHolder {
         val binding =
             TeamItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return TeamsViewHolder(binding)
+        return TeamsViewHolder(binding , listener)
     }
 
     override fun onBindViewHolder(holder: TeamsViewHolder, position: Int) {
@@ -23,12 +27,19 @@ class TeamsAdapter() : ListAdapter<MyTeamModel, TeamsAdapter.TeamsViewHolder>(My
     }
 
 
-    class TeamsViewHolder(private val binding: TeamItemLayoutBinding) :
+    class TeamsViewHolder(private val binding: TeamItemLayoutBinding ,private val  listener: AdapterClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: MyTeamModel) {
-            binding.TeamName.text = item.name
-            binding.imageLock.visibility = if (item.isOpen) View.GONE else View.VISIBLE
+            with(binding) {
+                TeamName.text = item.name
+                imageLock.visibility = if (item.isOpen) View.GONE else View.VISIBLE
+                buttonMore.setOnClickListener {
+                    listener.clickMore(item.id)
+                }
+            }
+
+
         }
 
     }

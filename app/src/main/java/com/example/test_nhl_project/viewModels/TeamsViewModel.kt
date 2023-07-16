@@ -23,6 +23,12 @@ class TeamsViewModel @Inject constructor(
         }
     }
 
+    fun getTeamsRoster(id: Int) {
+        viewModelScope.launch {
+            repository.getTeamRoster(id)
+        }
+    }
+
 
     init {
         getAllTeams()

@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
+        android:id="@+id/button_more"
         android:src="@drawable/baseline_format_list_bulleted_24"
         android:layout_gravity="end|bottom"
         android:layout_margin="12dp"

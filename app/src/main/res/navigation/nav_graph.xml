@@ -9,5 +9,18 @@
         android:id="@+id/mainFragment"
         android:name="com.example.test_nhl_project.ui.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_teamInfoFragment"
+            app:destination="@id/teamInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamInfoFragment"
+        android:name="com.example.test_nhl_project.ui.TeamInfoFragment"
+        android:label="fragment_team_info"
+        tools:layout="@layout/fragment_team_info" >
+        <action
+            android:id="@+id/action_teamInfoFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

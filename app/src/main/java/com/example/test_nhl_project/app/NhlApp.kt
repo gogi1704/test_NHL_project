@@ -4,5 +4,9 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class NhlApp:Application() {
+class NhlApp : Application() {
+
+    companion object {
+        const val BUNDLE_ID = "ID"
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.test_nhl_project.data.models.modelsFromServer
+package com.example.test_nhl_project.data.models.modelsFromServer.teamModels
 
 data class Team(
     val id:Int,
@@ -9,8 +9,8 @@ data class Team(
     val teamName:String,
     val locationName:String,
     val firstYearOfPlay:String,
-    val division:Division,
-    val conference:Conference,
+    val division: Division,
+    val conference: Conference,
     val franchise: Franchise,
     val shortName: String,
     val officialSiteUrl: String,
