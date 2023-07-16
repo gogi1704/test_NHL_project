@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:elevation="12dp"
+    app:cardCornerRadius="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/image_tShirt"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Vasya" />
+
+        <TextView
+            android:id="@+id/text_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_name"
+            android:layout_marginTop="8dp"
+            tools:text="Defenseman"
+            app:layout_constraintStart_toStartOf="@id/text_name"
+            />
+
+        <ImageView
+            android:id="@+id/image_tShirt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/majkasvgpng_ru_"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_tShirt"
+            app:layout_constraintEnd_toEndOf="@+id/image_tShirt"
+            app:layout_constraintStart_toStartOf="@id/image_tShirt"
+            app:layout_constraintTop_toTopOf="@id/image_tShirt"
+            tools:text="22" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
