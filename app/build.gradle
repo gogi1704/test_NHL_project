@@ -50,7 +50,6 @@ dependencies {
     def glide_version = "4.15.1"
     def okhttplogging_version = '5.0.0-alpha.11'
 
-    implementation 'com.github.amarjain07:StickyScrollView:1.0.3'
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'

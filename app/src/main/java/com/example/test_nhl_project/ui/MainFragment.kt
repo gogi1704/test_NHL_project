@@ -48,7 +48,8 @@ class MainFragment : Fragment() {
         }
 
         viewModel.teamsLiveData.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            binding.progress.visibility = if (it.isLoading) View.VISIBLE else View.GONE
+            adapter.submitList(it.teams)
         }
 
 

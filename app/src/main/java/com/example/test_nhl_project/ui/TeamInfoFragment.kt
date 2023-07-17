@@ -16,7 +16,6 @@ import com.example.test_nhl_project.ui.adapter.gameAdapter.MyGameAdapter
 import com.example.test_nhl_project.ui.adapter.rosterAdapter.MyRosterAdapter
 import com.example.test_nhl_project.viewModels.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Calendar
 import java.util.Date
 
 
@@ -68,7 +67,7 @@ class TeamInfoFragment : Fragment() {
 
             toggleButton.check(R.id.button_history)
 
-             viewModel.getGamesLastMonth(id!!, startDate, endDate)
+            viewModel.getGamesLastMonth(id!!, startDate, endDate)
         }
 
         viewModel.rosterLiveData.observe(viewLifecycleOwner) {
@@ -76,8 +75,13 @@ class TeamInfoFragment : Fragment() {
         }
 
         viewModel.gamesLiveData.observe(viewLifecycleOwner) {
-            adapterGame.submitList(it)
+            binding.progress.visibility = if (it.isLoading) View.VISIBLE else View.GONE
+            adapterGame.submitList(it.games)
         }
+
+//        viewModel.progressLiveData.observe(viewLifecycleOwner) {
+//            binding.progress.visibility = if (it) View.VISIBLE else View.GONE
+//        }
 
         return binding.root
     }

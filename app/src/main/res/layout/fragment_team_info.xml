@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.amar.library.ui.StickyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:stickyHeader="@id/toggleButton"
     tools:context=".ui.TeamInfoFragment">
 
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_team"
@@ -55,8 +55,8 @@
             android:id="@+id/card_buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
             android:layout_gravity="center"
+            android:layout_margin="4dp"
             app:cardCornerRadius="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,24 +66,23 @@
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/toggleButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/button_history"
                     style="?attr/materialButtonOutlinedStyle"
-                    android:textSize="28sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="History" />
+                    android:text="History"
+                    android:textSize="28sp" />
 
                 <Button
-                    android:textSize="28sp"
                     android:id="@+id/button_roster"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Roster" />
+                    android:text="Roster"
+                    android:textSize="28sp" />
 
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -91,30 +90,41 @@
 
         </FrameLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_roster"
-            android:visibility="gone"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/roster_item_layout" />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_roster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/roster_item_layout" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_games"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/game_item_layout" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_games"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/game_item_layout" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="top|center"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
 
     </LinearLayout>
 
 
-
-
-
-</com.amar.library.ui.StickyScrollView>
+</FrameLayout>

@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.test_nhl_project.data.models.modelsFromServer.peopleModels.RosterModel
-import com.example.test_nhl_project.data.models.myModels.MyGameModel
-import com.example.test_nhl_project.data.models.myModels.MyTeamModel
+import com.example.test_nhl_project.data.models.myModels.myModelsWithState.MyGameModelWIthState
+import com.example.test_nhl_project.data.models.myModels.myModelsWithState.MyTeamModelWithState
 import com.example.test_nhl_project.data.repository.TeamsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,12 +17,18 @@ class TeamsViewModel @Inject constructor(
     application: Application,
     private val repository: TeamsRepository
 ) : AndroidViewModel(application) {
+    private val defaultGame = MyGameModelWIthState()
+    private val defaultTeamModel = MyTeamModelWithState()
 
-    val teamsLiveData = MutableLiveData<List<MyTeamModel>>()
+
+    val teamsLiveData = MutableLiveData<MyTeamModelWithState>()
     val rosterLiveData = MutableLiveData<List<RosterModel>>()
-    val gamesLiveData = MutableLiveData<List<MyGameModel>>()
+
+
+    val gamesLiveData = MutableLiveData<MyGameModelWIthState>()
     fun getAllTeams() {
         viewModelScope.launch {
+            teamsLiveData.value = defaultTeamModel
             teamsLiveData.value = repository.getAllTeams()
         }
     }
@@ -35,6 +41,7 @@ class TeamsViewModel @Inject constructor(
 
     fun getGamesLastMonth(id: Int, startDate: String, endDate: String) {
         viewModelScope.launch {
+            gamesLiveData.value = defaultGame
             gamesLiveData.value = repository.getGamesLastMonth(id, startDate, endDate)
         }
     }
