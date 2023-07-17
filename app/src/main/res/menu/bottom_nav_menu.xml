@@ -5,13 +5,25 @@
         android:id="@+id/teams"
         android:enabled="true"
         android:icon="@drawable/baseline_sports_hockey_24"
-        android:title="www" />
+        android:title="Teams" />
+
+    <item
+        android:id="@+id/live"
+        android:enabled="true"
+        android:icon="@drawable/baseline_live_tv_24"
+        android:title="Live" />
+
+    <item
+        android:id="@+id/money"
+        android:enabled="true"
+        android:icon="@drawable/baseline_attach_money_24"
+        android:title="Money" />
 
 
     <item
         android:id="@+id/info"
         android:enabled="true"
         android:icon="@drawable/baseline_cast_for_education_24"
-        android:title="aaa" />
+        android:title="Info" />
 
 </menu>

@@ -1,4 +1,4 @@
-package com.example.test_nhl_project.ui
+package com.example.test_nhl_project.ui.fragments
 
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle

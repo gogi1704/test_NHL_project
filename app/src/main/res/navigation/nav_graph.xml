@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.test_nhl_project.ui.MainFragment"
+        android:name="com.example.test_nhl_project.ui.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -16,11 +16,26 @@
     </fragment>
     <fragment
         android:id="@+id/teamInfoFragment"
-        android:name="com.example.test_nhl_project.ui.TeamInfoFragment"
+        android:name="com.example.test_nhl_project.ui.fragments.TeamInfoFragment"
         android:label="fragment_team_info"
         tools:layout="@layout/fragment_team_info" >
         <action
             android:id="@+id/action_teamInfoFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/liveGameFragment"
+        android:name="com.example.test_nhl_project.ui.fragments.LiveGameFragment"
+        android:label="fragment_live_game"
+        tools:layout="@layout/fragment_live_game" />
+    <fragment
+        android:id="@+id/moneyFragment"
+        android:name="com.example.test_nhl_project.ui.fragments.MoneyFragment"
+        android:label="fragment_money"
+        tools:layout="@layout/fragment_money" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.test_nhl_project.ui.fragments.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
 </navigation>

@@ -23,13 +23,25 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.teams -> {
-                    navController
+                    navController.navigate(R.id.mainFragment)
+                    true
+                }
+
+                R.id.live -> {
+                    navController.navigate(R.id.liveGameFragment)
+                    true
+                }
+
+                R.id.money -> {
+                    navController.navigate(R.id.moneyFragment)
                     true
                 }
 
                 R.id.info -> {
+                    navController.navigate(R.id.infoFragment)
                     true
                 }
+
                 else -> false
 
             }
