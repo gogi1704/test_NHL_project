@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.example.test_nhl_project.R
 import com.example.test_nhl_project.app.NhlApp.Companion.BUNDLE_ID
 import com.example.test_nhl_project.databinding.FragmentTeamInfoBinding
 import com.example.test_nhl_project.ui.adapter.rosterAdapter.MyRosterAdapter
@@ -31,6 +32,17 @@ class TeamInfoFragment : Fragment() {
 
         with(binding) {
             recyclerAdapter.adapter = adapter
+            toggleButton.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
+                when(checkedId){
+                    R.id.button_history ->{
+                        toggleButton.uncheck(R.id.button_roster)
+                    }
+                    R.id.button_roster ->{
+                        toggleButton.uncheck(R.id.button_history)
+                    }
+                }
+
+            }
         }
 
 
