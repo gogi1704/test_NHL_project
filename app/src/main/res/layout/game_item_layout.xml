@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:elevation="12dp"
+    app:cardCornerRadius="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/image_firstTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/baseline_sports_hockey_72"
+            app:layout_constraintEnd_toEndOf="@+id/text_nameFirstTeam"
+            app:layout_constraintStart_toStartOf="@id/text_nameFirstTeam"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:layout_marginTop="4dp"
+
+            android:id="@+id/image_secondTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/majkasvgpng_ru_32"
+            app:layout_constraintEnd_toEndOf="@id/text_nameSecondTeam"
+            app:layout_constraintStart_toStartOf="@id/text_nameSecondTeam"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_nameFirstTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:maxWidth="150dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_firstTeam"
+            tools:text="Pinguins" />
+
+        <TextView
+            android:id="@+id/text_nameSecondTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="24sp"
+            android:maxWidth="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_secondTeam"
+            tools:text="Eagles" />
+
+        <TextView
+            android:id="@+id/text_scoreFirstTeam"
+            app:layout_constraintTop_toTopOf="@id/image_firstTeam"
+            app:layout_constraintStart_toEndOf="@id/image_firstTeam"
+            app:layout_constraintBottom_toBottomOf="@id/image_firstTeam"
+            tools:text="3"
+            android:layout_marginStart="16dp"
+            android:textSize="52sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/text_scoreSecondTeam"
+            app:layout_constraintTop_toTopOf="@id/image_secondTeam"
+            app:layout_constraintEnd_toStartOf="@id/image_secondTeam"
+            app:layout_constraintBottom_toBottomOf="@id/image_secondTeam"
+            tools:text="3"
+            android:layout_marginEnd="16dp"
+            android:textSize="52sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="52sp"
+            app:layout_constraintEnd_toStartOf="@id/text_scoreSecondTeam"
+            app:layout_constraintStart_toEndOf="@+id/text_scoreFirstTeam"
+            app:layout_constraintTop_toTopOf="@id/text_scoreSecondTeam" />
+
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2022/12/12"
+            app:layout_constraintBottom_toTopOf="@id/image_firstTeam"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/image_firstTeam"
+            app:layout_constraintTop_toTopOf="@id/image_secondTeam"
+            app:layout_constraintEnd_toEndOf="@id/image_secondTeam"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

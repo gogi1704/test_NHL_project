@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.test_nhl_project.R
 import com.example.test_nhl_project.app.NhlApp.Companion.BUNDLE_ID
+import com.example.test_nhl_project.app.NhlApp.Companion.BUNDLE_LOCATION
+import com.example.test_nhl_project.app.NhlApp.Companion.BUNDLE_NAME
 import com.example.test_nhl_project.databinding.FragmentMainBinding
 import com.example.test_nhl_project.ui.adapter.teamsAdapter.AdapterClickListener
 import com.example.test_nhl_project.ui.adapter.teamsAdapter.TeamsAdapter
@@ -28,10 +30,14 @@ class MainFragment : Fragment() {
 
         val adapter = TeamsAdapter(object : AdapterClickListener {
 
-            override fun clickMore(id: Int) {
+            override fun clickMore(id: Int, name: String, location: String) {
                 findNavController().navigate(
                     R.id.action_mainFragment_to_teamInfoFragment,
-                    Bundle().apply { putInt(BUNDLE_ID, id) })
+                    Bundle().apply {
+                        putInt(BUNDLE_ID, id)
+                        putString(BUNDLE_NAME, name)
+                        putString(BUNDLE_LOCATION, location)
+                    })
             }
 
         })

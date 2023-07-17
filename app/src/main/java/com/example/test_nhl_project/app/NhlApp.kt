@@ -8,5 +8,7 @@ class NhlApp : Application() {
 
     companion object {
         const val BUNDLE_ID = "ID"
+        const val BUNDLE_NAME = "NAME"
+        const val BUNDLE_LOCATION = "LOCATION"
     }
 }
