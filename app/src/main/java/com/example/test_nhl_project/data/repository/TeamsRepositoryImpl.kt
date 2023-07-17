@@ -1,7 +1,7 @@
 package com.example.test_nhl_project.data.repository
 
 import com.example.test_nhl_project.api.apiService.ApiService
-import com.example.test_nhl_project.data.models.myModels.MyRosterModel
+import com.example.test_nhl_project.data.models.modelsFromServer.peopleModels.RosterModel
 import com.example.test_nhl_project.data.models.myModels.MyTeamModel
 import java.util.Random
 import javax.inject.Inject
@@ -26,11 +26,11 @@ class TeamsRepositoryImpl @Inject constructor(private val apiService: ApiService
         }
     }
 
-    override suspend fun getTeamRoster(id: Int): MyRosterModel {
+    override suspend fun getTeamRoster(id: Int): List<RosterModel> {
 
         val response = apiService.getTeamRoster(id)
         if (response.isSuccessful) {
-            return response.body() ?: throw Exception()
+            return response.body()?.roster ?: throw Exception()
         } else throw Exception()
     }
 

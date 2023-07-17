@@ -1,4 +1,4 @@
-package com.example.test_nhl_project.ui.adapter
+package com.example.test_nhl_project.ui.adapter.teamsAdapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,9 @@ interface AdapterClickListener {
     fun clickMore(id:Int)
 }
 
-class TeamsAdapter(private val listener: AdapterClickListener) : ListAdapter<MyTeamModel, TeamsAdapter.TeamsViewHolder>(MyAdapterCallback()) {
+class TeamsAdapter(private val listener: AdapterClickListener) : ListAdapter<MyTeamModel, TeamsAdapter.TeamsViewHolder>(
+    MyTeamsAdapterCallback()
+) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamsViewHolder {
