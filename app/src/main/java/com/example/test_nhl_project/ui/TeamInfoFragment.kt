@@ -17,6 +17,7 @@ import com.example.test_nhl_project.ui.adapter.rosterAdapter.MyRosterAdapter
 import com.example.test_nhl_project.viewModels.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
+import java.util.Date
 
 
 @AndroidEntryPoint
@@ -32,6 +33,12 @@ class TeamInfoFragment : Fragment() {
         val adapterRoster = MyRosterAdapter()
         val adapterGame = MyGameAdapter()
         val id = arguments?.getInt(BUNDLE_ID)
+        val startDate =
+            SimpleDateFormat("yyyy-MM-dd").format(Date(System.currentTimeMillis() - 2628000000L * 12))
+        val endDate = SimpleDateFormat("yyyy-MM-dd").format(Date(System.currentTimeMillis()))
+
+
+
         if (id != null) {
             viewModel.getTeamsRoster(id)
             binding.textTeamName.text = arguments?.getString(BUNDLE_NAME)
@@ -60,10 +67,9 @@ class TeamInfoFragment : Fragment() {
             }
 
             toggleButton.check(R.id.button_history)
+
+             viewModel.getGamesLastMonth(id!!, startDate, endDate)
         }
-
-
-        val ftm = SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().time)
 
         viewModel.rosterLiveData.observe(viewLifecycleOwner) {
             adapterRoster.submitList(it)

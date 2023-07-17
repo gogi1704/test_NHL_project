@@ -50,7 +50,7 @@ class TeamsRepositoryImpl @Inject constructor(private val apiService: ApiService
                     scoreFirstTeam = it.games[0].teams.away.score,
                     scoreSecondTeam = it.games[0].teams.home.score,
                 )
-            } ?: throw Exception()
+            }?.reversed() ?: throw Exception()
         } else throw Exception()
     }
 

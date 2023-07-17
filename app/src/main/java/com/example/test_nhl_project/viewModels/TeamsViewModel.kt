@@ -41,7 +41,6 @@ class TeamsViewModel @Inject constructor(
 
 
     init {
-        getGamesLastMonth(12, "2018-01-02", "2019-01-02")
         getAllTeams()
     }
 
