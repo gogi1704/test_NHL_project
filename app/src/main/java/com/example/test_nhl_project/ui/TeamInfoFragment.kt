@@ -1,10 +1,11 @@
 package com.example.test_nhl_project.ui
 
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.test_nhl_project.R
 import com.example.test_nhl_project.app.NhlApp.Companion.BUNDLE_ID
@@ -12,6 +13,8 @@ import com.example.test_nhl_project.databinding.FragmentTeamInfoBinding
 import com.example.test_nhl_project.ui.adapter.rosterAdapter.MyRosterAdapter
 import com.example.test_nhl_project.viewModels.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
+
 
 @AndroidEntryPoint
 class TeamInfoFragment : Fragment() {
@@ -33,11 +36,12 @@ class TeamInfoFragment : Fragment() {
         with(binding) {
             recyclerAdapter.adapter = adapter
             toggleButton.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
-                when(checkedId){
-                    R.id.button_history ->{
+                when (checkedId) {
+                    R.id.button_history -> {
                         toggleButton.uncheck(R.id.button_roster)
                     }
-                    R.id.button_roster ->{
+
+                    R.id.button_roster -> {
                         toggleButton.uncheck(R.id.button_history)
                     }
                 }
@@ -46,9 +50,14 @@ class TeamInfoFragment : Fragment() {
         }
 
 
+        val ftm = SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().time)
 
         viewModel.rosterLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+        }
+
+        viewModel.gamesLiveData.observe(viewLifecycleOwner){
+            print(it)
         }
 
         return binding.root

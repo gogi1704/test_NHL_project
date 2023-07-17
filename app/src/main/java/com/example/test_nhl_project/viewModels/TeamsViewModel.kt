@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.test_nhl_project.data.models.modelsFromServer.peopleModels.RosterModel
+import com.example.test_nhl_project.data.models.myModels.MyGameModel
 import com.example.test_nhl_project.data.models.myModels.MyTeamModel
 import com.example.test_nhl_project.data.repository.TeamsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +20,7 @@ class TeamsViewModel @Inject constructor(
 
     val teamsLiveData = MutableLiveData<List<MyTeamModel>>()
     val rosterLiveData = MutableLiveData<List<RosterModel>>()
+    val gamesLiveData = MutableLiveData<List<MyGameModel>>()
     fun getAllTeams() {
         viewModelScope.launch {
             teamsLiveData.value = repository.getAllTeams()
@@ -31,8 +33,15 @@ class TeamsViewModel @Inject constructor(
         }
     }
 
+    fun getGamesLastMonth(id: Int, startDate: String, endDate: String) {
+        viewModelScope.launch {
+            gamesLiveData.value = repository.getGamesLastMonth(id, startDate, endDate)
+        }
+    }
+
 
     init {
+        getGamesLastMonth(12, "2018-01-02", "2019-01-02")
         getAllTeams()
     }
 

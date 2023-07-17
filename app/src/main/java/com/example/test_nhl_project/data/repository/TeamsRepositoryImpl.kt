@@ -2,6 +2,7 @@ package com.example.test_nhl_project.data.repository
 
 import com.example.test_nhl_project.api.apiService.ApiService
 import com.example.test_nhl_project.data.models.modelsFromServer.peopleModels.RosterModel
+import com.example.test_nhl_project.data.models.myModels.MyGameModel
 import com.example.test_nhl_project.data.models.myModels.MyTeamModel
 import java.util.Random
 import javax.inject.Inject
@@ -31,6 +32,25 @@ class TeamsRepositoryImpl @Inject constructor(private val apiService: ApiService
         val response = apiService.getTeamRoster(id)
         if (response.isSuccessful) {
             return response.body()?.roster ?: throw Exception()
+        } else throw Exception()
+    }
+
+    override suspend fun getGamesLastMonth(
+        id: Int,
+        startDate: String,
+        endDate: String
+    ): List<MyGameModel> {
+        val response = apiService.getGamesLastMonth(id, startDate, endDate)
+        if (response.isSuccessful) {
+            return response.body()?.dates?.map {
+                MyGameModel(
+                    date = it.date,
+                    nameFirstTeam = it.games[0].teams.away.team.name,
+                    nameSecondTeam = it.games[0].teams.home.team.name,
+                    scoreFirstTeam = it.games[0].teams.away.score,
+                    scoreSecondTeam = it.games[0].teams.home.score,
+                )
+            } ?: throw Exception()
         } else throw Exception()
     }
 
