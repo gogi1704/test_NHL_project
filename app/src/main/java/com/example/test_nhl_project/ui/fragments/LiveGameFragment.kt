@@ -67,6 +67,8 @@ class LiveGameFragment : Fragment() {
 
             buttonReset.setOnClickListener {
                 resetTimer()
+                textFirstCounter.text = "0"
+                textSecondCounter.text = "0"
                 textMin.text = "60"
                 textSec.text = "00"
                 toggleButtonStart.clearChecked()
