@@ -11,6 +11,7 @@ import com.example.test_nhl_project.ui.adapter.infoAdapter.MyInfoAdapter
 import com.example.test_nhl_project.viewModels.InfoViewModel
 
 class InfoFragment : Fragment() {
+
     private val viewModel: InfoViewModel by viewModels()
     private lateinit var binding: FragmentInfoBinding
     override fun onCreateView(
