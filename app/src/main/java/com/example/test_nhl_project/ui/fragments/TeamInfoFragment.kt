@@ -79,9 +79,7 @@ class TeamInfoFragment : Fragment() {
             adapterGame.submitList(it.games)
         }
 
-//        viewModel.progressLiveData.observe(viewLifecycleOwner) {
-//            binding.progress.visibility = if (it) View.VISIBLE else View.GONE
-//        }
+
 
         return binding.root
     }

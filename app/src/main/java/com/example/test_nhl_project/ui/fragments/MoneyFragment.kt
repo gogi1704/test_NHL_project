@@ -1,60 +1,120 @@
 package com.example.test_nhl_project.ui.fragments
 
+import android.content.Context.SENSOR_SERVICE
+import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.test_nhl_project.R
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
+import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.viewModels
+import com.example.test_nhl_project.databinding.FragmentMoneyBinding
+import com.example.test_nhl_project.viewModels.MoneyViewModel
+import java.util.Random
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MoneyFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MoneyFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentMoneyBinding
+    private lateinit var sensorManager: SensorManager
+    private lateinit var imageView: ImageView
+    private val viewModel: MoneyViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
+    private var lastX = 0f
+    private var lastY = 0f
+    private val threshold = 0.5f // Пороговое значение для определения наклона
+
+
+    private var isAnimating = false
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_money, container, false)
+    ): View {
+        binding = FragmentMoneyBinding.inflate(layoutInflater, container, false)
+
+        imageView = binding.imageMoney
+        sensorManager = requireActivity().getSystemService(SENSOR_SERVICE) as SensorManager
+
+
+
+
+        sensorManager.registerListener(
+            object : SensorEventListener {
+                override fun onSensorChanged(event: SensorEvent?) {
+                    if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
+                        val x = event.values[0]
+                        val y = event.values[1]
+
+                        if (Math.abs(x - lastX) > threshold || Math.abs(y - lastY) > threshold) {
+                            // Наклон телефона достаточно сильный - запускаем анимацию
+                            animateImageView(x, y)
+                        }
+
+                        lastX = x
+                        lastY = y
+                    }
+                }
+
+                override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+                }
+            },
+            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
+
+
+        viewModel.moneyCounterLiveData.observe(viewLifecycleOwner) {
+            binding.moneyCounter.text = it.toString()
+        }
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MoneyFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MoneyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun animateImageView(x: Float, y: Float) {
+        if (!isAnimating) {
+            isAnimating = true
+
+            val fromX = imageView.translationX
+            val fromY = imageView.translationY
+            val toX = fromX + x * 200
+            val toY = fromY + y * 200
+
+
+            val animation = TranslateAnimation(fromX, toX, fromY, toY)
+            animation.duration = 500
+            animation.interpolator = AccelerateInterpolator()
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {}
+
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onAnimationEnd(animation: Animation?) {
+                    isAnimating = false
+                    val color = Color.argb(255 , Random().nextInt(256) ,Random().nextInt(256),Random().nextInt(256) )
+                    imageView.setColorFilter(color)
+                    viewModel.collectMoney()
                 }
-            }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+            imageView.startAnimation(animation)
+        }
     }
+
+
+
 }
+
+
