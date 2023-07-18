@@ -36,7 +36,7 @@ class TeamsAdapter(private val listener: AdapterClickListener) : ListAdapter<MyT
             with(binding) {
                 TeamName.text = item.name
                 imageLock.visibility = if (item.isOpen) View.GONE else View.VISIBLE
-                buttonMore.setOnClickListener {
+                card.setOnClickListener {
                     listener.clickMore(item.id , item.name , item.location , item.isOpen)
                 }
             }
