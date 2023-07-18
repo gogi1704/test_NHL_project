@@ -39,11 +39,20 @@ class TeamsViewModel @Inject constructor(
         }
     }
 
+
     fun getGamesLastMonth(id: Int, startDate: String, endDate: String) {
         viewModelScope.launch {
             gamesLiveData.value = defaultGame
             gamesLiveData.value = repository.getGamesLastMonth(id, startDate, endDate)
         }
+    }
+
+    fun buyItem(id: Int) {
+        teamsLiveData.value = teamsLiveData.value?.copy(teams = teamsLiveData.value!!.teams.map {
+            if (it.id == id) {
+                it.copy(isOpen = true)
+            } else it
+        })
     }
 
 

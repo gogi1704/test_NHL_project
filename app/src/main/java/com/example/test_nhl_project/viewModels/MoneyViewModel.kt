@@ -15,10 +15,10 @@ class MoneyViewModel @Inject constructor(application: Application) :
 
     val prefs = application.getSharedPreferences(GET_PREFS_KEY, MODE_PRIVATE)
 
-    private var myMoney = prefs.getInt(PREFS_KEY_COUNT, 0)
+    var myMoney = prefs.getInt(PREFS_KEY_COUNT, 0)
         set(value) {
             field = value
-           myMoneyLiveData.value = value
+            myMoneyLiveData.value = value
         }
 
     val myMoneyLiveData = MutableLiveData(myMoney)
@@ -37,9 +37,16 @@ class MoneyViewModel @Inject constructor(application: Application) :
 
     }
 
+    fun buyItem() {
+        myMoney -= 25
+        prefs.edit()
+            .putInt(PREFS_KEY_COUNT, myMoney)
+            .apply()
+    }
+
     fun saveToPrefs() {
         prefs.edit()
-            .putInt(PREFS_KEY_COUNT, myMoney +counter)
+            .putInt(PREFS_KEY_COUNT, myMoney + counter)
             .apply()
         myMoney = prefs.getInt(PREFS_KEY_COUNT, 0)
         counter = 0

@@ -9,7 +9,7 @@ import com.example.test_nhl_project.data.models.myModels.MyTeamModel
 import com.example.test_nhl_project.databinding.TeamItemLayoutBinding
 
 interface AdapterClickListener {
-    fun clickMore(id:Int, name:String , location:String)
+    fun clickMore(id:Int, name:String , location:String , isOpen:Boolean)
 }
 
 class TeamsAdapter(private val listener: AdapterClickListener) : ListAdapter<MyTeamModel, TeamsAdapter.TeamsViewHolder>(
@@ -37,7 +37,7 @@ class TeamsAdapter(private val listener: AdapterClickListener) : ListAdapter<MyT
                 TeamName.text = item.name
                 imageLock.visibility = if (item.isOpen) View.GONE else View.VISIBLE
                 buttonMore.setOnClickListener {
-                    listener.clickMore(item.id , item.name , item.location)
+                    listener.clickMore(item.id , item.name , item.location , item.isOpen)
                 }
             }
 
