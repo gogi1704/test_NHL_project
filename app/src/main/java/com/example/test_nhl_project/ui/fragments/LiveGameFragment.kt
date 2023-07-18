@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.test_nhl_project.databinding.FragmentLiveGameBinding
+import com.example.test_nhl_project.viewModels.MoneyViewModel
 
 
 class LiveGameFragment : Fragment() {
@@ -14,7 +16,9 @@ class LiveGameFragment : Fragment() {
     private lateinit var countDownTimer: CountDownTimer
     private var isTimerRunning = false
     private var remainingTimeInMillis: Long = 0
-    private val timerDurationInMillis: Long = 3600_000 // Продолжительность таймера в миллисекундах
+    private val timerDurationInMillis: Long = 3600_000
+
+    private val moneyViewModel: MoneyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,13 +31,10 @@ class LiveGameFragment : Fragment() {
                 remainingTimeInMillis = millisUntilFinished
                 binding.textMin.text = (remainingTimeInMillis / 1000 / 60).toString()
                 binding.textSec.text = (remainingTimeInMillis / 1000 % 60).toString()
-                updateUI()
             }
 
             override fun onFinish() {
                 isTimerRunning = false
-                // Действия после завершения таймера
-                // Например, выполнение определенных действий или отображение сообщения
             }
         }
 
@@ -79,6 +80,10 @@ class LiveGameFragment : Fragment() {
 
 
 
+        moneyViewModel.myMoneyLiveData.observe(viewLifecycleOwner) {
+            binding.myMoney.text = it.toString()
+        }
+
         return binding.root
     }
 
@@ -88,20 +93,12 @@ class LiveGameFragment : Fragment() {
         isTimerRunning = true
     }
 
-    private fun pauseTimer() {
-        countDownTimer.cancel()
-        isTimerRunning = false
-    }
 
     private fun resetTimer() {
         countDownTimer.cancel()
         isTimerRunning = false
         remainingTimeInMillis = timerDurationInMillis
-        updateUI()
-    }
 
-    private fun updateUI() {
-        // Обновите ваш интерфейс (например, TextView) для отображения оставшегося времени
     }
 
 

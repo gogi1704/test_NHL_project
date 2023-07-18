@@ -14,13 +14,15 @@ import com.example.test_nhl_project.app.NhlApp.Companion.BUNDLE_NAME
 import com.example.test_nhl_project.databinding.FragmentMainBinding
 import com.example.test_nhl_project.ui.adapter.teamsAdapter.AdapterClickListener
 import com.example.test_nhl_project.ui.adapter.teamsAdapter.TeamsAdapter
+import com.example.test_nhl_project.viewModels.MoneyViewModel
 import com.example.test_nhl_project.viewModels.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
-    private val viewModel: TeamsViewModel by viewModels()
+    private val teamsViewModel: TeamsViewModel by viewModels()
+    private val moneyViewModel: MoneyViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,9 +49,13 @@ class MainFragment : Fragment() {
             teamsRecycler.adapter = adapter
         }
 
-        viewModel.teamsLiveData.observe(viewLifecycleOwner) {
+        teamsViewModel.teamsLiveData.observe(viewLifecycleOwner) {
             binding.progress.visibility = if (it.isLoading) View.VISIBLE else View.GONE
             adapter.submitList(it.teams)
+        }
+
+        moneyViewModel.myMoneyLiveData.observe(viewLifecycleOwner) {
+            binding.myMoney.text = it.toString()
         }
 
 

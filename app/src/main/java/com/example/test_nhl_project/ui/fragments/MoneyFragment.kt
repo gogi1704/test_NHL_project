@@ -31,7 +31,7 @@ class MoneyFragment : Fragment() {
 
     private var lastX = 0f
     private var lastY = 0f
-    private val threshold = 0.5f // Пороговое значение для определения наклона
+    private val threshold = 0.5f
 
 
     private var isAnimating = false
@@ -42,7 +42,6 @@ class MoneyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMoneyBinding.inflate(layoutInflater, container, false)
-
         imageView = binding.imageMoney
         sensorManager = requireActivity().getSystemService(SENSOR_SERVICE) as SensorManager
 
@@ -75,9 +74,20 @@ class MoneyFragment : Fragment() {
         )
 
 
+        binding.buttonSave.setOnClickListener {
+            viewModel.saveToPrefs()
+        }
+
+
         viewModel.moneyCounterLiveData.observe(viewLifecycleOwner) {
             binding.moneyCounter.text = it.toString()
         }
+
+        viewModel.myMoneyLiveData.observe(viewLifecycleOwner){
+            binding.myMoney.text = it.toString()
+        }
+
+
 
 
         return binding.root
@@ -102,7 +112,12 @@ class MoneyFragment : Fragment() {
                 @RequiresApi(Build.VERSION_CODES.O)
                 override fun onAnimationEnd(animation: Animation?) {
                     isAnimating = false
-                    val color = Color.argb(255 , Random().nextInt(256) ,Random().nextInt(256),Random().nextInt(256) )
+                    val color = Color.argb(
+                        255,
+                        Random().nextInt(256),
+                        Random().nextInt(256),
+                        Random().nextInt(256)
+                    )
                     imageView.setColorFilter(color)
                     viewModel.collectMoney()
                 }
@@ -112,7 +127,6 @@ class MoneyFragment : Fragment() {
             imageView.startAnimation(animation)
         }
     }
-
 
 
 }

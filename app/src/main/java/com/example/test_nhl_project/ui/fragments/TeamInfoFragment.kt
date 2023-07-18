@@ -23,7 +23,7 @@ import java.util.Date
 class TeamInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamInfoBinding
-    private val viewModel: TeamsViewModel by viewModels()
+    private val teamsViewModel: TeamsViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +39,7 @@ class TeamInfoFragment : Fragment() {
 
 
         if (id != null) {
-            viewModel.getTeamsRoster(id)
+            teamsViewModel.getTeamsRoster(id)
             binding.textTeamName.text = arguments?.getString(BUNDLE_NAME)
             binding.textTeamLocation.text = arguments?.getString(BUNDLE_LOCATION)
         }
@@ -67,17 +67,19 @@ class TeamInfoFragment : Fragment() {
 
             toggleButton.check(R.id.button_history)
 
-            viewModel.getGamesLastMonth(id!!, startDate, endDate)
+            teamsViewModel.getGamesLastMonth(id!!, startDate, endDate)
         }
 
-        viewModel.rosterLiveData.observe(viewLifecycleOwner) {
+        teamsViewModel.rosterLiveData.observe(viewLifecycleOwner) {
             adapterRoster.submitList(it)
         }
 
-        viewModel.gamesLiveData.observe(viewLifecycleOwner) {
+        teamsViewModel.gamesLiveData.observe(viewLifecycleOwner) {
             binding.progress.visibility = if (it.isLoading) View.VISIBLE else View.GONE
             adapterGame.submitList(it.games)
         }
+
+
 
 
 
